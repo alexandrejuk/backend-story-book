@@ -4,49 +4,49 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import model.Book;
+import model.OrderSell;
 
-public class BookDAO {
+public class OrderSellDAO {
     public EntityManager getEM() {
         EntityManagerFactory factory;
         factory = Persistence.createEntityManagerFactory("PapPU");
         return factory.createEntityManager();
     }
     
-    public Book save(Book book) {
+    public OrderSell save(OrderSell orderSell) {
         EntityManager em = getEM();
         try {
             em.getTransaction().begin();
-            em.persist(book);
+            em.persist(orderSell);
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
         } finally {
             em.close();
         }
-        return book;
+        return orderSell;
     }
     
-    public Book update(Book book) {
+    public OrderSell update(OrderSell orderSell) {
         EntityManager em = getEM();
         try {
             em.getTransaction().begin();
-            em.merge(book);
+            em.merge(orderSell);
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
         } finally {
             em.close();
         }
-        return book;
+        return orderSell;
     }
     
     public void delete(Long id) {
         EntityManager em = getEM();
-        Book book = em.find(Book.class, id);
+        OrderSell orderSell = em.find(OrderSell.class, id);
         try {
             em.getTransaction().begin();
-            em.remove(book);
+            em.remove(orderSell);
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
@@ -55,29 +55,27 @@ public class BookDAO {
         }
     }
     
-    public Book findById(Long id) {
+    public OrderSell findById(Long id) {
         EntityManager em = getEM();
-        Book book = null;
+        OrderSell orderSell = null;
         try {
-            book = em.find(Book.class, id);
+            orderSell = em.find(OrderSell.class, id);
         } finally {
             em.close();
         }
-        return book;
+        return orderSell;
     }
     
-     public List<Book> findAll() {
+     public List<OrderSell> findAll() {
         EntityManager em = getEM();
-        List<Book> books = null;
+        List<OrderSell> ordersSell = null;
         try {
-            books = em
-                    .createQuery("SELECT book FROM Book book", Book.class)
+            ordersSell = em
+                    .createQuery("SELECT orderSell FROM OrderSell orderSell", OrderSell.class)
                     .getResultList();
         } finally {
             em.close();
         }
-        return books;
+        return ordersSell;
     }
-
-    
 }

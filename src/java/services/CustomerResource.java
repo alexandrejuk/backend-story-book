@@ -1,58 +1,59 @@
 package services;
 
 import com.google.gson.Gson;
-import dao.BookDAO;
+import dao.CustomerDAO;
 import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
-import model.Book;
+import model.Customer;
 
-@Path("books")
-public class BooksResource {
+@Path("customers")
+public class CustomerResource {
 
     @Context
     private UriInfo context;
 
-    public BooksResource() {
+    public CustomerResource() {
     }
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getJson() {
         Gson gson = new Gson();
-        BookDAO bookDAO = new BookDAO();
+        CustomerDAO customerDAO = new CustomerDAO();
    
-        List<Book> books = bookDAO.findAll();
+        List<Customer> books = customerDAO.findAll();
         return gson.toJson(books);
     }
    
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public String createBook(@PathParam("bookId") String id) {
+    public String createBook(@PathParam("customerId") String id) {
         Gson gson = new Gson();
-        BookDAO bookDAO = new BookDAO();
+        CustomerDAO customerDAO = new CustomerDAO();
    
-        Book book = bookDAO.findById(Long.valueOf(id));
-        return gson.toJson(book);
+        Customer customer = customerDAO.findById(Long.valueOf(id));
+        return gson.toJson(customer);
     }
     
-    @Path("{bookId}")
+    @Path("{customerId}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getBookId(@PathParam("bookId") String id) {
+    public String getCustomerId(@PathParam("customerId") String id) {
         Gson gson = new Gson();
-        BookDAO bookDAO = new BookDAO();
+        CustomerDAO customerDAO = new CustomerDAO();
    
-        Book book = bookDAO.findById(Long.valueOf(id));
-        return gson.toJson(book);
+        Customer customer = customerDAO.findById(Long.valueOf(id));
+        return gson.toJson(customer);
     }
     
     @PUT

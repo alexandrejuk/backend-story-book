@@ -3,6 +3,10 @@
   <persistence-unit name="PapPU" transaction-type="JTA">
     <jta-data-source>java:app/databasePostgres</jta-data-source>
     <class>model.Book</class>
+    <class>model.Customer</class>
+    <class>model.OrderSell</class>
+    <class>model.Product</class>
+    <class>model.UserLogin</class>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>

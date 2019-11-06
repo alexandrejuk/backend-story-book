@@ -37,12 +37,13 @@ public class CustomerResource {
    
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public String createBook(@PathParam("customerId") String id) {
+    public String createCustomer(String content) {
         Gson gson = new Gson();
+        Customer customer = gson.fromJson(content, Customer.class);
         CustomerDAO customerDAO = new CustomerDAO();
-   
-        Customer customer = customerDAO.findById(Long.valueOf(id));
-        return gson.toJson(customer);
+        System.out.println(customer.getUserLogin().getUsername());
+        Customer response = customerDAO.save(customer);
+        return gson.toJson(response);
     }
     
     @Path("{customerId}")

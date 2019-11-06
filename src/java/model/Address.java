@@ -6,26 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
-public class Customer implements Serializable {
+public class Address implements Serializable {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     private String fullName;
     private String documentId;
-    @OneToOne
-    private UserLogin userlogin;
-  
-    public UserLogin getUserLogin() {
-        return userlogin;
-    }
-
-    public void setUserLogin(UserLogin userlogin) {
-        this.userlogin = userlogin;
-    }
 
     public Long getId() {
         return id;

@@ -36,11 +36,11 @@ public class OrderSellResource {
    
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public String createBook(@PathParam("orderSellId") String id) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String createBook(String content) {
         Gson gson = new Gson();
+        OrderSell orderSell = gson.fromJson(content, OrderSell.class);
         OrderSellDAO orderSellDAO = new OrderSellDAO();
-   
-        OrderSell orderSell = orderSellDAO.findById(Long.valueOf(id));
         return gson.toJson(orderSell);
     }
     
@@ -57,6 +57,11 @@ public class OrderSellResource {
     
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public String putJson(String content) {
+      Gson gson = new Gson();
+      OrderSell orderSell = gson.fromJson(content, OrderSell.class);
+      OrderSellDAO orderSellDAO = new OrderSellDAO();
+      return gson.toJson(orderSell);
     }
 }

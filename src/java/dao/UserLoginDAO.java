@@ -12,57 +12,18 @@ public class UserLoginDAO {
         return factory.createEntityManager();
     }
     
-    public UserLogin save(UserLogin userLogin) {
-        EntityManager em = getEM();
-        try {
-            em.getTransaction().begin();
-            em.persist(userLogin);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }
-        return userLogin;
-    }
-    
-    public UserLogin update(UserLogin userLogin) {
-        EntityManager em = getEM();
-        try {
-            em.getTransaction().begin();
-            em.merge(userLogin);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }
-        return userLogin;
-    }
-    
-    public void delete(Long id) {
-        EntityManager em = getEM();
-        UserLogin userLogin = em.find(UserLogin.class, id);
-        try {
-            em.getTransaction().begin();
-            em.remove(userLogin);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }
-    }
-    
-    public UserLogin findById(Long id) {
+    public UserLogin findByName(String username, String password) {
         EntityManager em = getEM();
         UserLogin userLogin = null;
         try {
-            userLogin = em.find(UserLogin.class, id);
+            userLogin = em.find(UserLogin.class, username);
+            if (!userLogin.getPassword().equals(password)) {
+                userLogin = null;
+            }
         } finally {
             em.close();
         }
         return userLogin;
     }
-    
+ 
 }

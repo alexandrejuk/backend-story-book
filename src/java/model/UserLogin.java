@@ -1,3 +1,4 @@
+
 package model;
 
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import javax.persistence.Id;
 
 @Entity
 public class UserLogin implements Serializable {
+
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,5 +38,6 @@ public class UserLogin implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }    
+    }
+    
 }

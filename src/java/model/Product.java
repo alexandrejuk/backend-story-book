@@ -1,10 +1,12 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Product implements Serializable {
@@ -15,7 +17,17 @@ public class Product implements Serializable {
     private String weight;
     private int price;
     private int quantity;
+    @OneToMany(mappedBy = "product_id")
+    private List<OrderSell> ordersSell;
 
+    public List<OrderSell> getOrdersSell() {
+        return ordersSell;
+    }
+
+    public void setOrdersSell(List<OrderSell> ordersSell) {
+        this.ordersSell = ordersSell;
+    }
+    
     public Long getId() {
         return id;
     }

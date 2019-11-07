@@ -14,10 +14,11 @@ public class ApplicationConfig extends Application {
     }
 
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(services.AddressResource.class);
         resources.add(services.CustomerResource.class);
+        resources.add(services.LoginResource.class);
         resources.add(services.OrderSellResource.class);
         resources.add(services.ProductResource.class);
-        resources.add(services.UserLoginResource.class);
     }
     
 }

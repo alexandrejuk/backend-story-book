@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -19,6 +20,18 @@ public class OrderSell implements Serializable {
     private int amount;
     private String payment_method;
     private String status;
+    @OneToMany(mappedBy = "ordersell_id")
+    private List<ProductOrder> productsOrder;
+
+    public List<ProductOrder> getProductsOrder() {
+        return productsOrder;
+    }
+
+    public void setProductsOrder(List<ProductOrder> productsOrder) {
+        this.productsOrder = productsOrder;
+    }
+    
+    
     
 
     public Long getId() {
